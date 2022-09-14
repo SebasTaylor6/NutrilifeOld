@@ -26,3 +26,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/admin', function(){
+    return view('roles.admin.index');
+})->middleware(['auth','role:admin'])->name('roles.admin.index');
