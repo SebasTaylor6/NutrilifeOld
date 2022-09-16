@@ -15,18 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    'role:admin'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('roles.admin.index');
     })->name('dashboard');
 });
 
-Route::get('/admin', function(){
-    return view('roles.admin.index');
-})->middleware(['auth','role:admin'])->name('roles.admin.index');
